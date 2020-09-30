@@ -1,0 +1,77 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "ConnectFourCharacter.h"
+#include "Components/SceneComponent.h"
+#include "Camera/CameraComponent.h"
+#include "Net/UnrealNetwork.h"
+#include <EngineGlobals.h>
+#include <Runtime/Engine/Classes/Engine/Engine.h>
+#include "Kismet/GameplayStatics.h"
+
+DEFINE_LOG_CATEGORY(LogCFCharacter);
+
+//MACRO for fast on screen debug text
+#define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Orange, text);
+
+// Sets default values
+AConnectFourCharacter::AConnectFourCharacter()
+{
+ 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+
+	// Set Replicatiable
+	SetReplicates(true);
+
+	// Setting Root Component
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
+
+	// Setting Static Camera Component
+	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
+	PlayerCamera->SetupAttachment(RootComponent);
+	PlayerCamera->bLockToHmd = true;
+	PlayerCamera->bUsePawnControlRotation = false;
+
+	CFController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	//Cast Successful
+	if (CFController)
+	{
+		CFController->bShowMouseCursor = true;
+	}
+
+
+}
+
+// Called when the game starts or when spawned
+void AConnectFourCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
+
+void AConnectFourCharacter::OnClick()
+{
+	//On Click Logic...
+	if (HasAuthority())
+	{
+
+		print("Clicked");
+	}
+}
+
+// Called every frame
+void AConnectFourCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+}
+
+// Called to bind functionality to input
+void AConnectFourCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	//Bind Trigger Click to OnClick method
+
+	PlayerInputComponent->BindAction("TriggerClick", IE_Pressed, this, &AConnectFourCharacter::OnClick);
+}
+
