@@ -46,17 +46,22 @@ AConnectFourCharacter::AConnectFourCharacter()
 void AConnectFourCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	//Differeniating the different players 
+	if (HasAuthority)
+	{
+		PlayerIndex = 0;
+	}
+	else
+	{
+		PlayerIndex = 1;
+	}
+	//Server going first
+	CurrentPlayerIndex = 0;
 }
 
 void AConnectFourCharacter::OnClick()
 {
-	//On Click Logic...
-	if (HasAuthority())
-	{
-
-		print("Clicked");
-	}
+	
 }
 
 // Called every frame

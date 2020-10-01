@@ -46,4 +46,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PlayerCamera")
 		class APlayerController* CFController;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PlayerIndex")
+		int32 PlayerIndex;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Replicated, Category = "PlayerIndex")
+		int32 CurrentPlayerIndex;
 };

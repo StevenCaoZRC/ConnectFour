@@ -24,42 +24,43 @@ UCLASS()
 class CONNECTFOUR_API ABaseTile : public AActor
 {
 	GENERATED_BODY()
+
 	
 public:	
 	// Sets default values for this actor's properties
 	ABaseTile();
-
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	//On clicked logic. Cast to all server and clients
-	UFUNCTION(NetMulticast, Reliable)
-	virtual void Clicked();
-
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	//Will be executed in Begin Play. Made virtual for potential expansion in child classes
-	virtual void Initialise(bool _CanInteract = false, bool _Occupied = false,  TEnumAsByte<ETileTypes> _TileType = ETileTypes::EMPTYTILE);
+	virtual void Initialise(bool _CanInteract = false, bool _Occupied = false);
 
 	//Setting the shape of the tile depending on the tile type
 	void SetStaticMesh(TEnumAsByte<ETileTypes> _TileType);
 
 	//Base Mesh other tiles will use.
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Tiles")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
 		class UStaticMeshComponent* TileMesh;
 
 	//To seperate selector tiles and play tiles
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Tiles")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
 		bool CanInteract;
 
 	//To seperate selector tiles and play tiles
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Tiles")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
 		bool Occupied;
 
 	//Each tile will have its own type specified
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Tiles")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
 		TEnumAsByte<ETileTypes> TileType;
+
+	//Stores mesh for the different tile forms.
+	 class UStaticMesh* SelectorMesh;
+	 class UStaticMesh* DefaultTileMesh;
+
+
 };
