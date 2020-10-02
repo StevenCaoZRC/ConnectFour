@@ -38,8 +38,6 @@ AConnectFourCharacter::AConnectFourCharacter()
 	{
 		CFController->bShowMouseCursor = true;
 	}
-
-
 }
 
 // Called when the game starts or when spawned
@@ -47,7 +45,7 @@ void AConnectFourCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	//Differeniating the different players 
-	if (HasAuthority)
+	if (HasAuthority())
 	{
 		PlayerIndex = 0;
 	}
@@ -61,7 +59,20 @@ void AConnectFourCharacter::BeginPlay()
 
 void AConnectFourCharacter::OnClick()
 {
+	//When player left clicks mouse, could also be done in blueprints
+}
+
+void AConnectFourCharacter::OnRep_CurrentPlayerIndex()
+{
+	//When it is end of turn
+}
+
+void AConnectFourCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps)
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	
+	//List of variables that are replicated
+	DOREPLIFETIME(AConnectFourCharacter, CurrentPlayerIndex);
 }
 
 // Called every frame

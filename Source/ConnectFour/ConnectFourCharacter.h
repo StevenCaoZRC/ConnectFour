@@ -23,14 +23,19 @@ public:
 	// Sets default values for this character's properties
 	AConnectFourCharacter();
 
-	UFUNCTION()
-		void OnClick();
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps);
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UFUNCTION(BlueprintCallable)
+		void OnClick();
+
+	UFUNCTION()
+		void OnRep_CurrentPlayerIndex();
 
 protected:
 	// Called when the game starts or when spawned
@@ -49,6 +54,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PlayerIndex")
 		int32 PlayerIndex;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Replicated, Category = "PlayerIndex")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,ReplicatedUsing= OnRep_CurrentPlayerIndex, Category = "PlayerIndex")
 		int32 CurrentPlayerIndex;
 };

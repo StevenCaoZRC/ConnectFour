@@ -18,7 +18,7 @@ ABaseTile::ABaseTile()
 
 	// Setting up Default Mesh types
 	SelectorMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("/Game/StarterContent/Shapes/Shape_QuadPyramid.Shape_QuadPyramid")).Object;
-	DefaultTileMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("/Game/StarterContent/Shapes/Shape_Cube.Shape_Cube")).Object;
+	DefaultTileMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("/Game/StarterContent/Shapes/Shape_Cylinder.Shape_Cylinder")).Object;
 
 	// Tile mesh is created and set to default square mesh so it can be viewed in editor
 	TileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TileMesh"));
@@ -51,7 +51,9 @@ void ABaseTile::SetStaticMesh(TEnumAsByte<ETileTypes> _TileType)
 	else
 	{
 		TileMesh->SetStaticMesh(DefaultTileMesh);												//Sets shape to cube if the tile is anything besides a selector tile
-		TileMesh->SetRelativeScale3D(FVector(1.0f, 3.0f, 3.0f));								//Adjusting size here so all tiles, have unified size. Will have to override this in 
+		TileMesh->SetRelativeScale3D(FVector(3.0f));											//Adjusting size here so all tiles, have unified size. Will have to override this in 
+		
+
 	}
 }
 
