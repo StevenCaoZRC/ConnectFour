@@ -8,9 +8,12 @@ ASelectorTile::ASelectorTile()
 {
 	//Establish the Tile type for Selector tiles. This will determine its mesh
 	TileType = ETileTypes::SELECTOR;
+
 }
 
 void ASelectorTile::BeginPlay()
 {
 	Super::BeginPlay();
+	//bool Initialise(_CanInteract, _Occupied);
+	Initialise(true);
 }

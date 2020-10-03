@@ -54,6 +54,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PlayerIndex")
 		int32 PlayerIndex;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,ReplicatedUsing= OnRep_CurrentPlayerIndex, Category = "PlayerIndex")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,ReplicatedUsing=OnRep_CurrentPlayerIndex, Category = "PlayerIndex")
 		int32 CurrentPlayerIndex;
 };

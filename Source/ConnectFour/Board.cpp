@@ -2,7 +2,7 @@
 
 
 #include "Board.h"
-
+#include "Net/UnrealNetwork.h"
 // Sets default values
 ABoard::ABoard()
 {

@@ -40,7 +40,7 @@ void ABaseTile::Initialise(bool _CanInteract, bool _Occupied)
 	Occupied = _Occupied;
 }
 
-void ABaseTile::SetStaticMesh(TEnumAsByte<ETileTypes> _TileType)
+void ABaseTile::SetStaticMesh(ETileTypes _TileType)
 {
 	if (_TileType == ETileTypes::SELECTOR)
 	{

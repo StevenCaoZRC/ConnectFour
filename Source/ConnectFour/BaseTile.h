@@ -40,7 +40,7 @@ protected:
 	virtual void Initialise(bool _CanInteract = false, bool _Occupied = false);
 
 	//Setting the shape of the tile depending on the tile type
-	void SetStaticMesh(TEnumAsByte<ETileTypes> _TileType);
+	void SetStaticMesh(ETileTypes _TileType);
 
 	//Base Mesh other tiles will use.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
@@ -56,7 +56,7 @@ protected:
 
 	//Each tile will have its own type specified
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
-		TEnumAsByte<ETileTypes> TileType;
+		ETileTypes TileType;
 
 	//Stores mesh for the different tile forms.
 	 class UStaticMesh* SelectorMesh;

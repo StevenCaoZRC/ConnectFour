@@ -20,8 +20,20 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(NetMulticast, reliable)
+	virtual void ServerChangeColour();
+	UFUNCTION(BlueprintCallable)
+	void ChangeColour();
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Player")
+		class AConnectFourCharacter* Player;
+
 
 protected:
 
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere)
+		class UMaterialInstance* OrangeMaterial;
+	UPROPERTY(EditAnywhere)
+		class UMaterialInstance* BlueMaterial;
 };

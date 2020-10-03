@@ -6,6 +6,20 @@
 #include "GameFramework/Actor.h"
 #include "Board.generated.h"
 
+class APlayTile;
+
+USTRUCT(BlueprintType)
+struct FBoardRowData
+{
+	GENERATED_BODY()
+public:
+	FBoardRowData() {};
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Board")
+	TArray<APlayTile*> PlayTileArray_Rows;
+
+};
+
 UCLASS()
 class CONNECTFOUR_API ABoard : public AActor
 {
@@ -15,12 +29,16 @@ public:
 	// Sets default values for this actor's properties
 	ABoard();
 
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Board")
+		TArray<FBoardRowData> PlayTileArray_Columns;
+
+
 
 };
