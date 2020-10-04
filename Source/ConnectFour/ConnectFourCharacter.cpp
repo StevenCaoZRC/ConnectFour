@@ -38,7 +38,7 @@ AConnectFourCharacter::AConnectFourCharacter()
 	{
 		CFController->bShowMouseCursor = true;
 	}
-
+	WinGame = false;
 
 }
 
@@ -47,16 +47,39 @@ void AConnectFourCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	//Differeniating the different players 
+	if (HasAuthority())
+	{
+		PlayerIndex = 0;
+		
+	}
+	else
+	{
+		PlayerIndex = 1;
+	}
+	//Server going first
+	CurrentPlayerIndex = 0;
+
+	
 }
 
 void AConnectFourCharacter::OnClick()
 {
-	//On Click Logic...
-	if (HasAuthority())
-	{
+	//When player left clicks mouse, could also be done in blueprints
+}
 
-		print("Clicked");
-	}
+void AConnectFourCharacter::OnRep_CurrentPlayerIndex()
+{
+	//When it is end of turn
+}
+
+void AConnectFourCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps)
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	
+	//List of variables that are replicated
+	DOREPLIFETIME(AConnectFourCharacter, CurrentPlayerIndex);
+	DOREPLIFETIME(AConnectFourCharacter, WinnerName);
 }
 
 // Called every frame
