@@ -32,6 +32,15 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+
+	//To seperate selector tiles and play tiles
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
+		bool Occupied;
+
+	//Each tile will have its own type specified
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
+		ETileTypes TileType;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -50,13 +59,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
 		bool CanInteract;
 
-	//To seperate selector tiles and play tiles
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
-		bool Occupied;
-
-	//Each tile will have its own type specified
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tiles")
-		ETileTypes TileType;
 
 	//Stores mesh for the different tile forms.
 	 class UStaticMesh* SelectorMesh;

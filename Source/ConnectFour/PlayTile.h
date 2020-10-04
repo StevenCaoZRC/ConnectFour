@@ -19,14 +19,18 @@ public:
 	APlayTile();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+	UFUNCTION(BlueprintCallable, Category = "PlayTile")
+	void SetAlreadyChecked(bool Checked);
+
+	bool GetAlreadyChecked();
 
 	UFUNCTION(NetMulticast, reliable)
 	virtual void ServerChangeColour();
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "PlayTile")
 	void ChangeColour();
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Player")
-		class AConnectFourCharacter* Player;
-
+	class AConnectFourCharacter* Player;
 
 protected:
 
@@ -36,4 +40,7 @@ protected:
 		class UMaterialInstance* OrangeMaterial;
 	UPROPERTY(EditAnywhere)
 		class UMaterialInstance* BlueMaterial;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
+		bool AlreadyChecked;
 };

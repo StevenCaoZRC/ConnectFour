@@ -56,4 +56,11 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,ReplicatedUsing=OnRep_CurrentPlayerIndex, Category = "PlayerIndex")
 		int32 CurrentPlayerIndex;
+
+	UPROPERTY(VisibleAnywhere, Replicated, BlueprintReadWrite, Category = "Player")
+		FString WinnerName;
+
+	//Determining if the player has won the game or not
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Board")
+		bool WinGame;  
 };

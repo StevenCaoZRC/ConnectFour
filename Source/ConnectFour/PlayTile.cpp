@@ -11,22 +11,37 @@ APlayTile::APlayTile()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	SetReplicates(true);
 	OrangeMaterial = CreateDefaultSubobject<UMaterialInstance>(TEXT("Player Orange Material"));
 	BlueMaterial = CreateDefaultSubobject<UMaterialInstance>(TEXT("Player Blue Material"));
-	
-	TileType = ETileTypes::EMPTYTILE;
+
 	Player = Cast<AConnectFourCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	SetReplicates(true);
+
+
 }
 
 void APlayTile::BeginPlay()
 {
 	Super::BeginPlay();
+	//Default to empty tile as none is occupying
+	TileType = ETileTypes::EMPTYTILE;
+	AlreadyChecked = false;
 }
+
 
 void APlayTile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void APlayTile::SetAlreadyChecked(bool Checked)
+{
+	AlreadyChecked = Checked;
+}
+
+bool APlayTile::GetAlreadyChecked()
+{
+	return AlreadyChecked;
 }
 
 void APlayTile::ServerChangeColour_Implementation()
@@ -37,6 +52,8 @@ void APlayTile::ServerChangeColour_Implementation()
 		TileMesh->SetMaterial(0, OrangeMaterial);
 		Occupied = true;
 		Player->CurrentPlayerIndex = 1;
+		TileType = ETileTypes::PLAYER1;
+		SetAlreadyChecked(true);
 	}
 	else
 	{
@@ -44,7 +61,10 @@ void APlayTile::ServerChangeColour_Implementation()
 		TileMesh->SetMaterial(0, BlueMaterial);
 		Occupied = true;
 		Player->CurrentPlayerIndex = 0;
+		TileType = ETileTypes::PLAYER2;
+		SetAlreadyChecked(true);
 	}
+	
 }
 
 void APlayTile::ChangeColour()

@@ -38,16 +38,20 @@ AConnectFourCharacter::AConnectFourCharacter()
 	{
 		CFController->bShowMouseCursor = true;
 	}
+	WinGame = false;
+
 }
 
 // Called when the game starts or when spawned
 void AConnectFourCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	//Differeniating the different players 
 	if (HasAuthority())
 	{
 		PlayerIndex = 0;
+		
 	}
 	else
 	{
@@ -55,6 +59,8 @@ void AConnectFourCharacter::BeginPlay()
 	}
 	//Server going first
 	CurrentPlayerIndex = 0;
+
+	
 }
 
 void AConnectFourCharacter::OnClick()
@@ -73,6 +79,7 @@ void AConnectFourCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 	
 	//List of variables that are replicated
 	DOREPLIFETIME(AConnectFourCharacter, CurrentPlayerIndex);
+	DOREPLIFETIME(AConnectFourCharacter, WinnerName);
 }
 
 // Called every frame

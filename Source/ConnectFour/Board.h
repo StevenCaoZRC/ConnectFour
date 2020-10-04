@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "BaseTile.h"
 #include "Board.generated.h"
 
 class APlayTile;
@@ -32,13 +33,27 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Player")
+		class AConnectFourCharacter* PlayerReference;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	int CheckDirection;
+	//Check win
+	UFUNCTION(BlueprintCallable, Category = "Board")
+	bool CheckWin(APlayTile* CurrentTile);
+	void CheckHorizontal(APlayTile* CurrentTile);
+	void CheckVertical(APlayTile* CurrentTile);
+	void CheckDownwardDiagonal(APlayTile* CurrentTile);
+	void CheckUpwardDiagonal(APlayTile* CurrentTile);
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Board")
 		TArray<FBoardRowData> PlayTileArray_Columns;
+	//Since number maximum is 41, only requires uint8 0 - 255
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Board")
+		uint8 EmptyTilesRemaining;
 
 
-
+	//Since number maximum is 4, only requires uint8 0 - 255
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Board")
+		uint8 CheckCounter; //Only need to check 4 in each direction
 };
