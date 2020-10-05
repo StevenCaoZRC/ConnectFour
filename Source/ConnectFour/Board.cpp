@@ -11,7 +11,7 @@ ABoard::ABoard()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	EmptyTilesRemaining = 41;
+	EmptyTilesRemaining = 42;
 	
 	CheckDirection = 1;
 }
@@ -25,6 +25,11 @@ void ABoard::BeginPlay()
 
 bool ABoard::CheckWin(APlayTile* CurrentTile)
 {
+	//Once it reaches 0 this means the board is filled 
+	if (EmptyTilesRemaining > 0)
+	{
+		EmptyTilesRemaining--;
+	}
 	CheckHorizontal(CurrentTile);
 	CheckVertical(CurrentTile);
 	CheckDownwardDiagonal(CurrentTile);
