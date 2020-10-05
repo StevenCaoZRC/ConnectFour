@@ -31,6 +31,7 @@ bool ABoard::CheckWin(APlayTile* CurrentTile)
 	CheckUpwardDiagonal(CurrentTile);
 	if (PlayerReference != nullptr)
 	{
+		//Only returns true if one of the checks are successful, rest of win is handled in blueprints BP_Board
 		if (PlayerReference->WinGame)
 		{
 			return true;
@@ -40,6 +41,10 @@ bool ABoard::CheckWin(APlayTile* CurrentTile)
 	return false;
 }
 
+
+//
+//Checking rows for connect four
+//
 void ABoard::CheckHorizontal(APlayTile* CurrentTile)
 {
 	for (uint8 columns = 0; columns < PlayTileArray_Columns.Num()-3; columns++)
@@ -62,6 +67,9 @@ void ABoard::CheckHorizontal(APlayTile* CurrentTile)
 	}
 }
 
+//
+//Checking columns for connect four
+//
 void ABoard::CheckVertical(APlayTile* CurrentTile)
 {
 	for (uint8 columns = 0; columns < PlayTileArray_Columns.Num(); columns++)
@@ -83,7 +91,9 @@ void ABoard::CheckVertical(APlayTile* CurrentTile)
 		}
 	}
 }
-
+//
+//Checks from the top left corner to the bottom right diagonal direction
+//
 void ABoard::CheckDownwardDiagonal(APlayTile* CurrentTile)
 {
 	for (uint8 columns = 0; columns < PlayTileArray_Columns.Num()-3; columns++)
@@ -106,6 +116,9 @@ void ABoard::CheckDownwardDiagonal(APlayTile* CurrentTile)
 	}
 }
 
+//
+//Checks from the bottom left corner to the top right diagonal direction
+//
 void ABoard::CheckUpwardDiagonal(APlayTile* CurrentTile)
 {
 	for (uint8 columns = 0; columns < PlayTileArray_Columns.Num()-3; columns++)

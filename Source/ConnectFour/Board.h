@@ -39,6 +39,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	int CheckDirection;
+
+	//Check Board Functions
 	//Check win
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	bool CheckWin(APlayTile* CurrentTile);
@@ -46,6 +48,8 @@ protected:
 	void CheckVertical(APlayTile* CurrentTile);
 	void CheckDownwardDiagonal(APlayTile* CurrentTile);
 	void CheckUpwardDiagonal(APlayTile* CurrentTile);
+
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Board")
 		TArray<FBoardRowData> PlayTileArray_Columns;
 	//Since number maximum is 41, only requires uint8 0 - 255
